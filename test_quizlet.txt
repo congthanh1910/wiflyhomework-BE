@@ -1,0 +1,9 @@
+﻿{
+    "rank": "A1",
+    "topic": "perhe",
+    "match": "<iframe src="https://quizlet.com/557606719/match/embed?i=1wxkdl&x=1jj1" height="500" width="100%" style={{border:0}}></iframe>",
+    "learn": "<iframe src="https://quizlet.com/557606719/learn/embed?i=1wxkdl&x=1jj1" height="500" width="100%" style={{border:0}}></iframe>",
+    "test": "<iframe src="https://quizlet.com/557606719/test/embed?i=1wxkdl&x=1jj1" height="500" width="100%" style={{border:0}}></iframe>",
+    "falshcards": "<iframe src="https://quizlet.com/557606719/flashcards/embed?i=1wxkdl&x=1jj1" height="500" width="100%" style={{border:0}}></iframe>",
+    "spell": "<iframe src="https://quizlet.com/557606719/spell/embed?i=1wxkdl&x=1jj1" height="500" width="100%" style={{border:0}}></iframe>"
+}
