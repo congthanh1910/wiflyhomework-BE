@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-let Bookwidgets = new Schema(
+let Exercises = new Schema(
   {
     rank: { type: String },
     topic: { type: String },
@@ -11,8 +11,8 @@ let Bookwidgets = new Schema(
     link: { type: String },
   },
   {
-    collection: "bookwidgets",
+    collection: "exercises",
   }
 );
 
-module.exports = mongoose.model("Bookwidgets", Bookwidgets);
+module.exports = mongoose.model("Exercises", Exercises);
