@@ -34,11 +34,11 @@ app.get(
   }
 );
 
-app.get("/", async (req, res) => {
-  res.json({
-    message: "Okay.",
-  });
-});
+// app.get("/", async (req, res) => {
+//   res.json({
+//     message: "Okay.",
+//   });
+// });
 //api
 
 app.use("/login", require("./routes/login"));
