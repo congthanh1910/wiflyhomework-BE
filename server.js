@@ -20,15 +20,17 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//api
 app.get("/", async (req, res) => {
   res.json({
     message: "Okay.",
   });
 });
+//api
 
-app.use("/bookwidgets", require("./routes/bookwidgets"));
-app.use("/quizlet", require("./routes/quizlet"));
+app.use("/login", require("./routes/login"));
+app.use("/user", require("./routes/user"));
+app.use("/exercises", require("./routes/exercises"));
+app.use("/vocabulary", require("./routes/vocabulary"));
 
 app.listen(PORT, function () {
   console.log("Server is running on Port:", PORT);
