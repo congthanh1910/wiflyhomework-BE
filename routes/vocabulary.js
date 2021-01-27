@@ -1,12 +1,6 @@
 const router = require("express").Router();
-const {
-  createVocabulary,
-  findVocabulary,
-  deleteVocabulary,
-} = require("../controllers/vocabulary");
+const { findVocabulary } = require("../controllers/vocabulary");
 
-router.post("/add", createVocabulary);
-router.get("/all", findVocabulary);
-router.delete("/delete/:id", deleteVocabulary);
+router.get("/find", findVocabulary);
 
 module.exports = router;

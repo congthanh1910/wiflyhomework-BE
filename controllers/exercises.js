@@ -14,6 +14,27 @@ async function createExercises(req, res) {
   }
 }
 
+async function allExercises(req, res) {
+  try {
+    const data = await Exercises.find();
+    if (data.length !== 0) {
+      return res.status(200).json({
+        List: data,
+      });
+    } else {
+      return res.status(201).json({
+        message: "List Empty ",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      message: "Server error. Please try again.",
+      error: err.message,
+    });
+  }
+}
+
 async function findExercises(req, res) {
   try {
     const data = await Exercises.find({
@@ -54,4 +75,9 @@ async function deleteExercises(req, res) {
   }
 }
 
-module.exports = { createExercises, findExercises, deleteExercises };
+module.exports = {
+  createExercises,
+  findExercises,
+  allExercises,
+  deleteExercises,
+};

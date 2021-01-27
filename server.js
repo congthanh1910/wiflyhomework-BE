@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3030;
-const cors = require("cors");
+const passport = require("passport");
 const mongoose = require("mongoose");
 const config = require("./services/database");
 
@@ -20,6 +21,19 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// middlewares
+app.use(passport.initialize());
+require("./middlewares/passport")(passport);
+app.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    res.json({
+      message: "Okay.",
+    });
+  }
+);
+
 app.get("/", async (req, res) => {
   res.json({
     message: "Okay.",
@@ -28,7 +42,7 @@ app.get("/", async (req, res) => {
 //api
 
 app.use("/login", require("./routes/login"));
-app.use("/user", require("./routes/user"));
+app.use("/admin", require("./routes/user"));
 app.use("/exercises", require("./routes/exercises"));
 app.use("/vocabulary", require("./routes/vocabulary"));
 
