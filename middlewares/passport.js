@@ -11,7 +11,7 @@ jwtOptions.secretOrKey = process.env.JWT_SECRET || "abc123";
 module.exports = (passport) => {
   passport.use(
     new JwtStrategy(jwtOptions, async function (jwt_payload, done) {
-      console.log("jwt payload received : ", jwt_payload);
+      //console.log("jwt payload received : ", jwt_payload);
       let user = await User.findOne({ _id: jwt_payload._id });
       if (user) {
         return done(null, user);

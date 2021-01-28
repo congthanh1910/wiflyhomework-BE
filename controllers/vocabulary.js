@@ -18,7 +18,7 @@ async function allVocabulary(req, res) {
   try {
     const data = await Vocabulary.find();
     if (data.length !== 0) {
-      return res.status(200).json({
+      return res.json({
         List: data,
       });
     } else {
@@ -59,12 +59,57 @@ async function findVocabulary(req, res) {
   }
 }
 
+async function updateVocabulary(req, res) {
+  const {
+    _id,
+    rank,
+    topic,
+    name,
+    match,
+    learn,
+    test,
+    flashcards,
+    spell,
+  } = req.body;
+  try {
+    const vocabulary = await Vocabulary.findById(_id);
+    if (!vocabulary) {
+      return res.status(201).json({
+        message: "No such vocabulary found",
+      });
+    }
+    await Vocabulary.findByIdAndUpdate(
+      { _id: _id },
+      {
+        rank: rank,
+        topic: topic,
+        name: name,
+        match: match,
+        learn: learn,
+        test: test,
+        flashcards: flashcards,
+        spell: spell,
+      },
+      {
+        new: true,
+      }
+    );
+    return res.json({ message: "Exercises update successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      message: "server error. Please try again.",
+      error: err.message,
+    });
+  }
+}
+
 async function deleteVocabulary(req, res) {
   const id = req.params.id;
   try {
     await Vocabulary.findByIdAndDelete(id);
-    res.status(200).json({
-      message: "Success",
+    res.json({
+      message: "Vocabulary delete successfully",
     });
   } catch (err) {
     res.status(400).json({
@@ -78,5 +123,6 @@ module.exports = {
   createVocabulary,
   findVocabulary,
   allVocabulary,
+  updateVocabulary,
   deleteVocabulary,
 };

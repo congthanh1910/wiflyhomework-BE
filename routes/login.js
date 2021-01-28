@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET || "acb123";
+const JWT_SECRET = process.env.JWT_SECRET || "abc123";
 const router = require("express").Router();
 const User = require("../services/user");
 const bcrypt = require("bcrypt");
@@ -9,7 +9,7 @@ router.post("/", async function (req, res) {
   if (username && password) {
     let user = await User.findOne({ username: username });
     if (!user) {
-      res.status(401).json({ message: "No such admin found" });
+      return res.status(401).json({ message: "No such admin found" });
     }
     if (bcrypt.compareSync(password, user.password)) {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET);

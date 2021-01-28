@@ -8,7 +8,7 @@ async function createUser(req, res) {
   });
   try {
     await user.save();
-    res.status(200).json({ message: "New user created successfully" });
+    res.json({ message: "New user created successfully" });
   } catch (err) {
     console.log(err);
     res.status(400).json({
@@ -18,4 +18,27 @@ async function createUser(req, res) {
   }
 }
 
-module.exports = { createUser };
+async function changePassword(req, res) {
+  const userId = req.user._id;
+  const oldPass = req.body.oldPass;
+  const newPass = req.body.newPass;
+  const currentPassHashed = req.user.password;
+  const verifyPassword = bcrypt.compareSync(oldPass, currentPassHashed);
+  if (!verifyPassword) {
+    return res.status(400).send({
+      error: `Old password didn't match.`,
+    });
+  }
+  await User.findOneAndUpdate(
+    { _id: userId },
+    { password: bcrypt.hashSync(newPass, 10) },
+    {
+      new: true,
+    }
+  );
+  res.json({
+    message: "Successfully updated password.",
+  });
+}
+
+module.exports = { createUser, changePassword };
