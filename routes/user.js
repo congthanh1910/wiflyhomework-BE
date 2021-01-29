@@ -1,13 +1,29 @@
 const router = require("express").Router();
 const passport = require("passport");
-const { createUser, changePassword } = require("../controllers/user");
+const {
+  createUser,
+  changePassword,
+  deleteUser,
+} = require("../controllers/user");
 const {
   allVocabulary,
   updateVocabulary,
+  createVocabulary,
+  deleteVocabulary,
 } = require("../controllers/vocabulary");
-const { allExercises, updateExercises } = require("../controllers/exercises");
+const {
+  allExercises,
+  updateExercises,
+  createExercises,
+  deleteExercises,
+} = require("../controllers/exercises");
 
-router.post("/add", createUser);
+router.post("/create", createUser);
+router.delete(
+  "/delete/:id",
+  passport.authenticate("jwt", { session: false }),
+  deleteUser
+);
 
 router.post(
   "/changePassword",
@@ -15,15 +31,34 @@ router.post(
   changePassword
 );
 
+router.post(
+  "/vocabulary/add",
+  passport.authenticate("jwt", { session: false }),
+  createVocabulary
+);
+
 router.get(
   "/vocabulary/all",
   passport.authenticate("jwt", { session: false }),
-  updateVocabulary
+  allVocabulary
 );
+
 router.put(
   "/vocabulary/update",
   passport.authenticate("jwt", { session: false }),
-  allVocabulary
+  updateVocabulary
+);
+
+router.delete(
+  "/vocabulary/delete/:id",
+  passport.authenticate("jwt", { session: false }),
+  deleteVocabulary
+);
+
+router.post(
+  "/exercises/add",
+  passport.authenticate("jwt", { session: false }),
+  createExercises
 );
 
 router.get(
@@ -31,10 +66,17 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   allExercises
 );
+
 router.put(
   "/exercises/update",
   passport.authenticate("jwt", { session: false }),
   updateExercises
+);
+
+router.delete(
+  "/exercises/delete/:id",
+  passport.authenticate("jwt", { session: false }),
+  deleteExercises
 );
 
 module.exports = router;

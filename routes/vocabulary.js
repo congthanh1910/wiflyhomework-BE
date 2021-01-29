@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { findVocabulary } = require("../controllers/vocabulary");
 
-router.get("/find", findVocabulary);
+router.get("/", findVocabulary);
 
 module.exports = router;

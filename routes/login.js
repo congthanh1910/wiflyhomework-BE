@@ -16,6 +16,7 @@ router.post("/", async function (req, res) {
       res.json({
         message: "ok",
         token: token,
+        infor: user,
       });
     } else {
       res.status(401).json({ msg: "Password is incorrect" });

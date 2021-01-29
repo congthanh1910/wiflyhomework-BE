@@ -4,7 +4,7 @@ async function createVocabulary(req, res) {
   const vocabulary = new Vocabulary(req.body);
   try {
     await vocabulary.save();
-    res.status(200).json({ message: "New vocabulary created successfully" });
+    res.json({ message: "New vocabulary created successfully" });
   } catch (err) {
     console.log(err);
     res.status(400).json({

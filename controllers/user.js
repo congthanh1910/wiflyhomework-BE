@@ -17,6 +17,20 @@ async function createUser(req, res) {
     });
   }
 }
+async function deleteUser(req, res) {
+  const id = req.params.id;
+  try {
+    await User.findByIdAndDelete(id);
+    res.json({
+      message: "User delete successfully",
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: "Server error. Please try again.",
+      error: err.message,
+    });
+  }
+}
 
 async function changePassword(req, res) {
   const userId = req.user._id;
@@ -41,4 +55,4 @@ async function changePassword(req, res) {
   });
 }
 
-module.exports = { createUser, changePassword };
+module.exports = { createUser, changePassword, deleteUser };

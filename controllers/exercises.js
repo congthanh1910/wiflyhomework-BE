@@ -23,7 +23,7 @@ async function allExercises(req, res) {
       });
     } else {
       return res.status(201).json({
-        message: "List Empty ",
+        message: "List Empty",
       });
     }
   } catch (err) {
