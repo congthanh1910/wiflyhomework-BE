@@ -62,7 +62,6 @@ async function findExercises(req, res) {
 
 async function updateExercises(req, res) {
   const { _id, rank, topic, skill, level, name, link } = req.body;
-  console.log("req: ", req.body);
 
   try {
     const exercises = await Exercises.findById(_id);
